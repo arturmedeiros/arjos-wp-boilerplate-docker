@@ -1,0 +1,6 @@
+.env
+.idea
+wordpress/temp/*
+!wordpress/temp/.gitignore
+mysql/temp/*
+!mysql/temp/.gitignore

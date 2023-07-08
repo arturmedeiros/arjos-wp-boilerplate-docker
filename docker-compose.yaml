@@ -1,0 +1,60 @@
+# docker-compose.yaml
+version: '3.8'
+
+# Cria a rede
+networks:
+  wordpress_net:
+    driver: bridge
+
+# Cria os containers (Em ordem)
+services:
+  # 1) Banco MySQL
+  wp-db:
+    image: mysql:8.0.30
+    restart: always
+    networks:
+      - wordpress_net
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PWD}
+      MYSQL_USER: ${DATABASE_USER_NAME}
+      MYSQL_PASSWORD: ${DATABASE_USER_PWD}
+      MYSQL_DATABASE: ${DATABASE_DB_NAME}
+    volumes:
+      - ./mysql/temp:/var/lib/mysql
+
+  # 2) WordPress
+  wp-web:
+    build:
+      context: ./wordpress
+      dockerfile: Dockerfile
+    restart: always
+    networks:
+      - wordpress_net
+    depends_on:
+      - wp-db
+    environment:
+      WORDPRESS_DB_HOST: wp-db
+      WORDPRESS_DB_USER: ${DATABASE_USER_NAME}
+      WORDPRESS_DB_PASSWORD: ${DATABASE_USER_PWD}
+      WORDPRESS_DB_NAME: ${DATABASE_DB_NAME}
+    ports:
+      - 8080:80
+    volumes:
+      - ./wordpress/temp:/var/www/html
+
+  # 3) PHPMyAdmin
+  wp-phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    networks:
+      - wordpress_net
+    depends_on:
+      - wp-web
+      - wp-db
+    environment:
+      PMA_HOST: wp-db
+      PMA_PORT: 3306
+      PMA_USER: ${DATABASE_USER_NAME}
+      PMA_PASSWORD: ${DATABASE_USER_PWD}
+    ports:
+      - 8181:80
