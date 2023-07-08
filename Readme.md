@@ -2,8 +2,8 @@
 
 [![WordPress](https://img.shields.io/badge/Wordpress-000?style=for-the-badge&logo=Wordpress)](https://br.wordpress.org/)
 [![Docker](https://img.shields.io/badge/Docker-000?style=for-the-badge&logo=Docker)](https://hub.docker.com/)
-[![MySQL](https://img.shields.io/badge/MySQL-000?style=for-the-badge&logo=MySQL)](https://hub.docker.com/)
-[![PHPMyAdmin](https://img.shields.io/badge/PHPMyAdmin-000?style=for-the-badge&logo=PHPMyAdmin)](https://hub.docker.com/)
+[![MySQL](https://img.shields.io/badge/MySQL-000?style=for-the-badge&logo=MySQL)](https://www.mysql.com/)
+[![PHPMyAdmin](https://img.shields.io/badge/PHPMyAdmin-000?style=for-the-badge&logo=PHPMyAdmin)](https://www.phpmyadmin.net/)
 
 ## About
 
@@ -30,6 +30,21 @@ DATABASE_USER_NAME=
 DATABASE_USER_PWD=
 DATABASE_DB_NAME=
 DATABASE_ROOT_PWD=
+```
+
+To use with .env:
+
+```shell
+docker-compose --env-file .env up -d
+```
+
+Others commands
+```shell
+docker-compose up -d
+docker-compose down
+docker-compose logs
+docker-compose ps
+docker-compose restart
 ```
 
 ## 🧑🏻‍💻 Author
