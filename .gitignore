@@ -1,9 +1,8 @@
 .env
 .idea
 wordpress/**
+!wordpress/wp-content
 !wordpress/wp-content/**
 !wordpress/Dockerfile
-wordpress/temp/*
-!wordpress/temp/.gitignore
 mysql/temp/*
 !mysql/temp/.gitignore

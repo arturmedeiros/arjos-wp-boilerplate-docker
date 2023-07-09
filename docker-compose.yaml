@@ -40,7 +40,8 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./wordpress/temp:/var/www/html
+      - ./wordpress:/var/www/html
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 
   # 3) PHPMyAdmin
   wp-phpmyadmin:
@@ -56,5 +57,7 @@ services:
       PMA_PORT: 3306
       PMA_USER: ${DATABASE_USER_NAME}
       PMA_PASSWORD: ${DATABASE_USER_PWD}
+    volumes:
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     ports:
       - 8181:80
